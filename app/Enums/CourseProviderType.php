@@ -7,7 +7,6 @@ use App\Traits\EnumTrait;
 enum CourseProviderType: string
 {
     use EnumTrait;
-
     case ONLINE = 'online';
     case MOOC = 'MOOC';
     case UNIVERSITY = 'university';

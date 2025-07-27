@@ -64,9 +64,9 @@ class CompanyResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            /*->recordUrl(
+            ->recordUrl(
                 fn (Model $record): string => route('filament.user.resources.companies.view', ['record' => $record]),
-            )*/
+            )
             ->columns([
                 TextColumn::make('name')
                     ->searchable()

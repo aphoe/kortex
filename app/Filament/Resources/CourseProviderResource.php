@@ -28,6 +28,8 @@ class CourseProviderResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
 
+    protected static ?string $label = 'Providers';
+
     public static function getNavigationGroup(): ?string
     {
         return NavigationGroup::COURSES->label();
