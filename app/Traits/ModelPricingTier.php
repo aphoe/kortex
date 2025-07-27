@@ -23,7 +23,7 @@ trait ModelPricingTier
      * Scopes
      */
 
-    public function scopeByType(Builder $query, string $type): Builder
+    public function scopeByPricingTierType(Builder $query, string $type): Builder
     {
         return $query->where('pricing_tier_type', $type);
     }
