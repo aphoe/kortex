@@ -119,6 +119,7 @@ class ResourceResource extends ResourcesResource
                 //TextColumn::make('description'),
 
                 TextColumn::make('url')
+                    ->searchable()
                     ->copyable()
                     ->copyMessage('URL copied')
                     ->copyMessageDuration(1500),

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\ResourceType;
 use App\Models\Company;
 use App\Models\Resource;
 use App\Models\ResourceCategory;
@@ -18,7 +19,7 @@ class ResourceFactory extends Factory
             'name' => $this->faker->name(),
             'description' => $this->faker->text(),
             'url' => $this->faker->url(),
-            'type' => $this->faker->word(),
+            'type' => ResourceType::fakerChoice(),
             'is_open_source' => $this->faker->boolean(),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
