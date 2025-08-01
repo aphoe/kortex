@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use App\Traits\ModelCourseProviderType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Company extends Model
+class CourseProvider extends Model
 {
     use HasFactory;
+    use ModelCourseProviderType;
 
     protected $guarded = [];
 
@@ -16,8 +18,8 @@ class Company extends Model
      * Relationships
      */
 
-    public function resources(): HasMany
+    public function courses(): HasMany
     {
-        return $this->hasMany(Resource::class);
+        return $this->hasMany(Course::class);
     }
 }
