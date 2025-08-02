@@ -61,6 +61,7 @@ class UserPanelProvider extends PanelProvider
             ->navigationGroups([
                 NavigationGroupEnum::RESOURCES->label(),
                 NavigationGroupEnum::COURSES->label(),
+                NavigationGroupEnum::BOOKMARKS->label(),
                 NavigationGroupEnum::MISC->label(),
                 NavigationGroupEnum::USERS->label(),
             ]);

@@ -3,11 +3,10 @@
 namespace App\Filament\Resources;
 
 use App\Enums\NavigationGroup;
-use App\Filament\Resources\ResourceCategoryResource\Pages;
-use App\Models\ResourceCategory;
+use App\Filament\Resources\BookmarkTypeResource\Pages;
+use App\Models\BookmarkType;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Placeholder;
-use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -20,19 +19,19 @@ use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class ResourceCategoryResource extends Resource
+class BookmarkTypeResource extends Resource
 {
-    protected static ?string $model = ResourceCategory::class;
+    protected static ?string $model = BookmarkType::class;
 
-    protected static ?string $slug = 'resource-categories';
+    protected static ?string $slug = 'bookmark-types';
 
     protected static ?string $navigationIcon = 'heroicon-o-folder';
 
-    protected static ?string $navigationLabel = 'Categories';
+    protected static ?string $navigationLabel  = 'Types';
 
     public static function getNavigationGroup(): ?string
     {
-        return NavigationGroup::RESOURCES->label();
+        return NavigationGroup::BOOKMARKS->label();
     }
 
     public static function form(Form $form): Form
@@ -40,7 +39,7 @@ class ResourceCategoryResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')
-                    ->columnSpan("full")
+                    ->columnSpan('full')
                     ->required(),
 
                 MarkdownEditor::make('description')
@@ -48,11 +47,11 @@ class ResourceCategoryResource extends Resource
 
                 Placeholder::make('created_at')
                     ->label('Created Date')
-                    ->content(fn(?ResourceCategory $record): string => $record?->created_at?->diffForHumans() ?? '-'),
+                    ->content(fn(?BookmarkType $record): string => $record?->created_at?->diffForHumans() ?? '-'),
 
                 Placeholder::make('updated_at')
                     ->label('Last Modified Date')
-                    ->content(fn(?ResourceCategory $record): string => $record?->updated_at?->diffForHumans() ?? '-'),
+                    ->content(fn(?BookmarkType $record): string => $record?->updated_at?->diffForHumans() ?? '-'),
             ]);
     }
 
@@ -64,7 +63,7 @@ class ResourceCategoryResource extends Resource
                     ->searchable()
                     ->sortable(),
 
-                //TextColumn::make('description'),
+                TextColumn::make('description'),
             ])
             ->filters([
                 //
@@ -74,7 +73,7 @@ class ResourceCategoryResource extends Resource
                     ViewAction::make(),
                     EditAction::make(),
                     DeleteAction::make(),
-                ]),
+                ])
             ])
             ->bulkActions([
                 BulkActionGroup::make([
@@ -86,10 +85,10 @@ class ResourceCategoryResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListResourceCategories::route('/'),
-            'create' => Pages\CreateResourceCategory::route('/create'),
-            'view' => Pages\ViewResourceCategory::route('/{record}'),
-            'edit' => Pages\EditResourceCategory::route('/{record}/edit'),
+            'index' => Pages\ListBookmarkTypes::route('/'),
+            'create' => Pages\CreateBookmarkType::route('/create'),
+            'view' => Pages\ViewBookmarkType::route('/{record}'),
+            'edit' => Pages\EditBookmarkType::route('/{record}/edit'),
         ];
     }
 
