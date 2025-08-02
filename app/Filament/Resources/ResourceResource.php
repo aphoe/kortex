@@ -25,6 +25,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Parallax\FilamentComments\Tables\Actions\CommentsAction;
 
 class ResourceResource extends ResourcesResource
 {
@@ -136,6 +137,7 @@ class ResourceResource extends ResourcesResource
             ->actions([
                 ActionGroup::make([
                     ViewAction::make(),
+                    CommentsAction::make(),
                     EditAction::make(),
                     DeleteAction::make(),
                 ])

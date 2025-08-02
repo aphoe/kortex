@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Parallax\FilamentComments\Models\Traits\HasFilamentComments;
 
 class Resource extends Model
 {
     use HasFactory;
+    use HasFilamentComments;
     use ModelResourceType;
 
     protected $guarded = [];

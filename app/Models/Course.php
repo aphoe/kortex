@@ -7,10 +7,12 @@ use App\Traits\ModelPricingTier;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Parallax\FilamentComments\Models\Traits\HasFilamentComments;
 
 class Course extends Model
 {
     use HasFactory;
+    use HasFilamentComments;
     use ModelPricingTier;
     use ModelLevel;
 

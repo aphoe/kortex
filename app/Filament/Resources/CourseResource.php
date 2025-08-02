@@ -26,6 +26,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Parallax\FilamentComments\Tables\Actions\CommentsAction;
 
 class CourseResource extends Resource
 {
@@ -119,6 +120,7 @@ class CourseResource extends Resource
             ->actions([
                 ActionGroup::make([
                     ViewAction::make(),
+                    CommentsAction::make(),
                     EditAction::make(),
                     DeleteAction::make(),
                 ])
