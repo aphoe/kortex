@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Enums\NavigationGroup as NavigationGroupEnum;
+use App\Filament\Resources\DashboardResource\Widgets\StatsOverview;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -39,8 +40,7 @@ class UserPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+                StatsOverview::class,
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -61,6 +61,7 @@ class UserPanelProvider extends PanelProvider
             ->navigationGroups([
                 NavigationGroupEnum::RESOURCES->label(),
                 NavigationGroupEnum::COURSES->label(),
+                NavigationGroupEnum::BOOKMARKS->label(),
                 NavigationGroupEnum::MISC->label(),
                 NavigationGroupEnum::USERS->label(),
             ]);

@@ -8,9 +8,11 @@
     "require": {
         "php": "^8.2",
         "filament/filament": "^3.3",
+        "filament/spatie-laravel-tags-plugin": "^3.2",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
-        "opcodesio/log-viewer": "^3.19"
+        "opcodesio/log-viewer": "^3.19",
+        "parallax/filament-comments": "^1.5"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
