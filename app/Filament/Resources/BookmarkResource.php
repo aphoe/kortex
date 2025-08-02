@@ -8,6 +8,7 @@ use App\Models\Bookmark;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\SpatieTagsInput;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -21,6 +22,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Tags\Tag;
 
 class BookmarkResource extends Resource
 {
@@ -53,6 +55,9 @@ class BookmarkResource extends Resource
                     ->relationship('bookmarkType', 'name')
                     ->searchable()
                     ->required(),
+
+                SpatieTagsInput::make('tags')
+                    ->suggestions(Tag::pluck('name')->toArray()),
 
                 MarkdownEditor::make('description')
                     ->columnSpan("full"),

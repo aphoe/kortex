@@ -13,6 +13,7 @@ use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\SpatieTagsInput;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -27,6 +28,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Parallax\FilamentComments\Tables\Actions\CommentsAction;
+use Spatie\Tags\Tag;
 
 class CourseResource extends Resource
 {
@@ -74,6 +76,9 @@ class CourseResource extends Resource
                 DatePicker::make('launch_date'),
 
                 Checkbox::make('has_certificate'),
+
+                SpatieTagsInput::make('tags')
+                    ->suggestions(Tag::pluck('name')->toArray()),
 
                 Placeholder::make('created_at')
                     ->label('Created Date')

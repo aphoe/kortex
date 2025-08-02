@@ -11,6 +11,7 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\SpatieTagsInput;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource as ResourcesResource;
@@ -26,6 +27,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Parallax\FilamentComments\Tables\Actions\CommentsAction;
+use Spatie\Tags\Tag;
 
 class ResourceResource extends ResourcesResource
 {
@@ -76,6 +78,9 @@ class ResourceResource extends ResourcesResource
                         '1:1',
                     ])
                     ->required(),
+
+                SpatieTagsInput::make('tags')
+                    ->suggestions(Tag::pluck('name')->toArray()),
 
                 MarkdownEditor::make('description')
                     ->columnSpan('full'),
