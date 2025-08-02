@@ -3,10 +3,11 @@
 namespace App\Filament\Resources;
 
 use App\Enums\NavigationGroup;
-use App\Filament\Resources\BookmarkTypeResource\Pages;
-use App\Models\BookmarkType;
+use App\Filament\Resources\BookmarkResource\Pages;
+use App\Models\Bookmark;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Placeholder;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -18,16 +19,16 @@ use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 
-class BookmarkTypeResource extends Resource
+class BookmarkResource extends Resource
 {
-    protected static ?string $model = BookmarkType::class;
+    protected static ?string $model = Bookmark::class;
 
-    protected static ?string $slug = 'bookmark-types';
+    protected static ?string $slug = 'bookmarks';
 
-    protected static ?string $navigationIcon = 'heroicon-o-folder';
-
-    protected static ?string $navigationLabel  = 'Types';
+    protected static ?string $navigationIcon = 'heroicon-o-bookmark';
 
     public static function getNavigationGroup(): ?string
     {
@@ -38,8 +39,19 @@ class BookmarkTypeResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('name')
+                TextInput::make('title')
                     ->columnSpan('full')
+                    ->required(),
+
+                TextInput::make('url')
+                    ->label('URL')
+                    ->columnSpan('full')
+                    ->required()
+                    ->url(),
+
+                Select::make('bookmark_type_id')
+                    ->relationship('bookmarkType', 'name')
+                    ->searchable()
                     ->required(),
 
                 MarkdownEditor::make('description')
@@ -47,11 +59,11 @@ class BookmarkTypeResource extends Resource
 
                 Placeholder::make('created_at')
                     ->label('Created Date')
-                    ->content(fn(?BookmarkType $record): string => $record?->created_at?->diffForHumans() ?? '-'),
+                    ->content(fn(?Bookmark $record): string => $record?->created_at?->diffForHumans() ?? '-'),
 
                 Placeholder::make('updated_at')
                     ->label('Last Modified Date')
-                    ->content(fn(?BookmarkType $record): string => $record?->updated_at?->diffForHumans() ?? '-'),
+                    ->content(fn(?Bookmark $record): string => $record?->updated_at?->diffForHumans() ?? '-'),
             ]);
     }
 
@@ -59,13 +71,17 @@ class BookmarkTypeResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')
+                TextColumn::make('title')
                     ->searchable()
                     ->sortable(),
 
-                TextColumn::make('bookmarks_count')
-                    ->label('Bookmarks')
-                    ->counts('bookmarks'),
+                TextColumn::make('bookmarkType.name')
+                    ->searchable()
+                    ->sortable(),
+
+                TextColumn::make('url')
+                    ->label('URL')
+                    ->searchable(),
 
                 //TextColumn::make('description'),
             ])
@@ -89,15 +105,31 @@ class BookmarkTypeResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListBookmarkTypes::route('/'),
-            'create' => Pages\CreateBookmarkType::route('/create'),
-            'view' => Pages\ViewBookmarkType::route('/{record}'),
-            'edit' => Pages\EditBookmarkType::route('/{record}/edit'),
+            'index' => Pages\ListBookmarks::route('/'),
+            'create' => Pages\CreateBookmark::route('/create'),
+            'view' => Pages\ViewBookmark::route('/{record}'),
+            'edit' => Pages\EditBookmark::route('/{record}/edit'),
         ];
+    }
+
+    public static function getGlobalSearchEloquentQuery(): Builder
+    {
+        return parent::getGlobalSearchEloquentQuery()->with(['bookmarkType']);
     }
 
     public static function getGloballySearchableAttributes(): array
     {
-        return ['name'];
+        return ['title', 'bookmarkType.name'];
+    }
+
+    public static function getGlobalSearchResultDetails(Model $record): array
+    {
+        $details = [];
+
+        if ($record->bookmarkType) {
+            $details['BookmarkType'] = $record->bookmarkType->name;
+        }
+
+        return $details;
     }
 }

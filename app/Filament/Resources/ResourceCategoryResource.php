@@ -64,6 +64,10 @@ class ResourceCategoryResource extends Resource
                     ->searchable()
                     ->sortable(),
 
+                TextColumn::make('resources_count')
+                    ->label('Resources')
+                    ->counts('resources'),
+
                 //TextColumn::make('description'),
             ])
             ->filters([
