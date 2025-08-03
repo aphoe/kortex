@@ -97,7 +97,8 @@ class CompanyResource extends Resource
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->defaultSort('name');
     }
 
     public static function getPages(): array

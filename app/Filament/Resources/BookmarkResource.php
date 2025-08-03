@@ -104,7 +104,8 @@ class BookmarkResource extends Resource
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->defaultSort('title');
     }
 
     public static function getPages(): array
