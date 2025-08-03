@@ -36,7 +36,7 @@ class CourseResource extends Resource
 
     protected static ?string $slug = 'courses';
 
-    protected static ?string $navigationIcon = 'heroicon-o-book-open';
+    protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
 
     public static function getNavigationGroup(): ?string
     {
