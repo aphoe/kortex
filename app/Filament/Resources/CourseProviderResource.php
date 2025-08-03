@@ -26,7 +26,7 @@ class CourseProviderResource extends Resource
 
     protected static ?string $slug = 'course-providers';
 
-    protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
+    protected static ?string $navigationIcon = 'heroicon-o-building-library';
 
     protected static ?string $label = 'Providers';
 
