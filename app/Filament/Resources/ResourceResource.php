@@ -152,7 +152,8 @@ class ResourceResource extends ResourcesResource
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->defaultSort('name');
     }
 
     public static function getPages(): array
