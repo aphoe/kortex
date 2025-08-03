@@ -43,6 +43,7 @@ class CompanyResource extends Resource
                     ->required(),
 
                 TextInput::make('url')
+                    ->label('URL')
                     ->url(),
 
                 TextInput::make('email')

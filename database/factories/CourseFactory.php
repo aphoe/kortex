@@ -16,6 +16,7 @@ class CourseFactory extends Factory
         return [
             'title' => $this->faker->word(),
             'description' => $this->faker->text(),
+            'url' => $this->faker->url(),
             'level' => $this->faker->word(),
             'duration' => $this->faker->word(),
             'launch_date' => Carbon::now(),

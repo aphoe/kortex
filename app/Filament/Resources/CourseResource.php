@@ -48,11 +48,15 @@ class CourseResource extends Resource
         return $form
             ->schema([
                 TextInput::make('title')
+                    ->columnSpan('full')
                     ->required(),
 
+                TextInput::make('url')
+                    ->label('URL')
+                    ->url(),
+
                 Select::make('course_provider_id')
-                    ->relationship('courseProvider', 'name')
-                    ->searchable(),
+                    ->relationship('courseProvider', 'name'),
 
                 MarkdownEditor::make('description')
                     ->columnSpan('full'),
