@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Enums\NavigationGroup as NavigationGroupEnum;
+use App\Filament\Pages\EditProfile;
 use App\Filament\Resources\DashboardResource\Widgets\StatsOverview;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -62,6 +63,8 @@ class UserPanelProvider extends PanelProvider
                 NavigationGroupEnum::MISC->label(),
                 NavigationGroupEnum::USERS->label(),
             ])
+            ->profile(EditProfile::class, false)
+            ->passwordReset()
             ->spa()
             ->unsavedChangesAlerts();
     }
