@@ -73,9 +73,11 @@ class CompanyResource extends Resource
                     ->searchable()
                     ->sortable(),
 
-                TextColumn::make('url'),
+                TextColumn::make('url')
+                    ->label('URL'),
 
-                TextColumn::make('description'),
+                TextColumn::make('description')
+                    ->searchable(),
 
                 TextColumn::make('email')
                     ->searchable()

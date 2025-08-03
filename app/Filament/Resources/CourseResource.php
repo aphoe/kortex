@@ -110,17 +110,18 @@ class CourseResource extends Resource
                     ->sortable(),
 
                 TextColumn::make('level')
+                    ->searchable()
+                    ->sortable()
                     ->formatStateUsing(fn (string $state, ?Course $record): string => $record->level_string),
 
-                TextColumn::make('duration'),
-
-                TextColumn::make('launch_date')
-                    ->date(),
-
                 TextColumn::make('has_certificate')
+                    ->label('Cert.')
                     ->formatStateUsing(fn (string $state, ?Course $record): string => $record->has_certificate ? 'Yes' : 'No'),
 
                 TextColumn::make('pricing_tier_type')
+                    ->label('Pricing Tier')
+                    ->searchable()
+                    ->sortable()
                     ->formatStateUsing(fn (string $state, ?Course $record): string => $record->pricing_tier_type_string),
             ])
             ->filters([

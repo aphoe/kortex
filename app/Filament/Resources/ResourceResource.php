@@ -113,6 +113,7 @@ class ResourceResource extends ResourcesResource
                     ->sortable(),
 
                 TextColumn::make('resourceCategory.name')
+                    ->label('Category')
                     ->searchable()
                     ->sortable(),
 
@@ -123,6 +124,7 @@ class ResourceResource extends ResourcesResource
                 //TextColumn::make('description'),
 
                 TextColumn::make('url')
+                    ->label('URL')
                     ->searchable()
                     ->copyable()
                     ->copyMessage('URL copied')
@@ -132,6 +134,7 @@ class ResourceResource extends ResourcesResource
                     ->formatStateUsing(fn (string $state, ?Resource $record): string => $record->type_string),
 
                 TextColumn::make('is_open_source')
+                    ->label('Open Source')
                     ->formatStateUsing(fn (string $state, ?Resource $record): string => $record->open_source),
             ])
             ->filters([
