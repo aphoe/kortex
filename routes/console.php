@@ -8,6 +8,8 @@ use Parallax\FilamentComments\Models\FilamentComment;
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');*/
 
+Schedule::command('livewire:configure-s3-upload-cleanup')->daily();
 Schedule::command('model:prune', [
     '--model' => [FilamentComment::class],
 ])->daily();
+
