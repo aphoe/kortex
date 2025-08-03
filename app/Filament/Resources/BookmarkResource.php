@@ -80,6 +80,7 @@ class BookmarkResource extends Resource
                     ->sortable(),
 
                 TextColumn::make('bookmarkType.name')
+                    ->label('Type')
                     ->searchable()
                     ->sortable(),
 
