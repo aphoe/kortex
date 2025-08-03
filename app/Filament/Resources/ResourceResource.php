@@ -47,12 +47,10 @@ class ResourceResource extends ResourcesResource
         return $form
             ->schema([
                 Select::make('company_id')
-                    ->relationship('company', 'name')
-                    ->searchable(),
+                    ->relationship('company', 'name'),
 
                 Select::make('resource_category_id')
-                    ->relationship('resourceCategory', 'name')
-                    ->searchable(),
+                    ->relationship('resourceCategory', 'name'),
 
                 TextInput::make('name')
                     ->columnSpan('full')

@@ -53,7 +53,6 @@ class BookmarkResource extends Resource
 
                 Select::make('bookmark_type_id')
                     ->relationship('bookmarkType', 'name')
-                    ->searchable()
                     ->required(),
 
                 SpatieTagsInput::make('tags')
