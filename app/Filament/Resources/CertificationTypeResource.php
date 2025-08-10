@@ -62,6 +62,10 @@ class CertificationTypeResource extends Resource
                     ->searchable()
                     ->sortable(),
 
+                TextColumn::make('certifications_count')
+                    ->label('Certifications')
+                    ->counts('certifications'),
+
                 //TextColumn::make('description'),
             ])
             ->filters([

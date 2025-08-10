@@ -75,6 +75,10 @@ class CertificationProviderResource extends Resource
                     ->copyable()
                     ->copyMessage('URL copied')
                     ->copyMessageDuration(1500),
+
+                TextColumn::make('certifications_count')
+                    ->label('Certifications')
+                    ->counts('certifications'),
             ])
             ->filters([
                 //
