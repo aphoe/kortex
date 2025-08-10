@@ -108,6 +108,10 @@ class ResourceResource extends ResourcesResource
                         'loading' => 'lazy',
                     ]),
 
+                TextColumn::make('name')
+                    ->searchable()
+                    ->sortable(),
+
                 TextColumn::make('company.name')
                     ->searchable()
                     ->sortable(),
@@ -117,14 +121,11 @@ class ResourceResource extends ResourcesResource
                     ->searchable()
                     ->sortable(),
 
-                TextColumn::make('name')
-                    ->searchable()
-                    ->sortable(),
-
                 //TextColumn::make('description'),
 
                 TextColumn::make('url')
                     ->label('URL')
+                    ->limit(30)
                     ->searchable()
                     ->copyable()
                     ->copyMessage('URL copied')
