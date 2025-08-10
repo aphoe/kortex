@@ -79,6 +79,7 @@ class CourseProviderResource extends Resource
 
                 TextColumn::make('url')
                     ->label('URL')
+                    ->limit(30)
                     ->searchable()
                     ->copyable()
                     ->copyMessage('URL copied')

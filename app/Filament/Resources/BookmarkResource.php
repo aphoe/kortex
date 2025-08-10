@@ -86,7 +86,11 @@ class BookmarkResource extends Resource
 
                 TextColumn::make('url')
                     ->label('URL')
-                    ->searchable(),
+                    ->limit(30)
+                    ->searchable()
+                    ->copyable()
+                    ->copyMessage('URL copied')
+                    ->copyMessageDuration(1500),
 
                 //TextColumn::make('description'),
             ])

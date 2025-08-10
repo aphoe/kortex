@@ -74,7 +74,12 @@ class CompanyResource extends Resource
                     ->sortable(),
 
                 TextColumn::make('url')
-                    ->label('URL'),
+                    ->label('URL')
+                    ->limit(30)
+                    ->searchable()
+                    ->copyable()
+                    ->copyMessage('URL copied')
+                    ->copyMessageDuration(1500),
 
                 TextColumn::make('description')
                     ->searchable(),
