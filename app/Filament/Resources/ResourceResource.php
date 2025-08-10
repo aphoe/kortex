@@ -108,16 +108,16 @@ class ResourceResource extends ResourcesResource
                         'loading' => 'lazy',
                     ]),
 
+                TextColumn::make('name')
+                    ->searchable()
+                    ->sortable(),
+
                 TextColumn::make('company.name')
                     ->searchable()
                     ->sortable(),
 
                 TextColumn::make('resourceCategory.name')
                     ->label('Category')
-                    ->searchable()
-                    ->sortable(),
-
-                TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
 
