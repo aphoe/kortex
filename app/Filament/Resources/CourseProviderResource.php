@@ -28,7 +28,7 @@ class CourseProviderResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-building-library';
 
-    protected static ?string $label = 'Providers';
+    protected static ?string $navigationLabel = 'Providers';
 
     public static function getNavigationGroup(): ?string
     {
@@ -79,6 +79,7 @@ class CourseProviderResource extends Resource
 
                 TextColumn::make('url')
                     ->label('URL')
+                    ->limit(30)
                     ->searchable()
                     ->copyable()
                     ->copyMessage('URL copied')

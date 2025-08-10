@@ -9,6 +9,8 @@ enum NavigationGroup: string
     use EnumTrait;
 
     case BOOKMARKS = 'bookmarks';
+
+    case CERTIFICATIONS = 'certifications';
     case COURSES = 'courses';
 
     case MISC = 'miscellaneous';

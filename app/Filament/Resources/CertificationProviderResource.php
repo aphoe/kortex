@@ -3,9 +3,8 @@
 namespace App\Filament\Resources;
 
 use App\Enums\NavigationGroup;
-use App\Filament\Resources\CompanyResource\Pages;
-use App\Models\Company;
-use Closure;
+use App\Filament\Resources\CertificationProviderResource\Pages;
+use App\Models\CertificationProvider;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\TextInput;
@@ -19,19 +18,20 @@ use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Model;
 
-class CompanyResource extends Resource
+class CertificationProviderResource extends Resource
 {
-    protected static ?string $model = Company::class;
+    protected static ?string $model = CertificationProvider::class;
 
-    protected static ?string $slug = 'companies';
+    protected static ?string $slug = 'certification-providers';
 
-    protected static ?string $navigationIcon = 'heroicon-o-building-office';
+    protected static ?string $navigationIcon = 'heroicon-o-building-library';
+
+    protected static ?string $navigationLabel = 'Providers';
 
     public static function getNavigationGroup(): ?string
     {
-        return NavigationGroup::MISC->label();
+        return NavigationGroup::CERTIFICATIONS->label();
     }
 
     public static function form(Form $form): Form
@@ -39,35 +39,30 @@ class CompanyResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')
-                    ->columnSpan("full")
+                    ->columnSpan('full')
                     ->required(),
 
                 TextInput::make('url')
+                    ->columnSpan('full')
                     ->label('URL')
                     ->url(),
 
-                TextInput::make('email')
-                    ->email(),
-
                 MarkdownEditor::make('description')
-                    ->columnSpan("full"),
+                    ->columnSpan('full'),
 
                 Placeholder::make('created_at')
                     ->label('Created Date')
-                    ->content(fn(?Company $record): string => $record?->created_at?->diffForHumans() ?? '-'),
+                    ->content(fn(?CertificationProvider $record): string => $record?->created_at?->diffForHumans() ?? '-'),
 
                 Placeholder::make('updated_at')
                     ->label('Last Modified Date')
-                    ->content(fn(?Company $record): string => $record?->updated_at?->diffForHumans() ?? '-'),
+                    ->content(fn(?CertificationProvider $record): string => $record?->updated_at?->diffForHumans() ?? '-'),
             ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
-            ->recordUrl(
-                fn (Model $record): string => route('filament.user.resources.companies.view', ['record' => $record]),
-            )
             ->columns([
                 TextColumn::make('name')
                     ->searchable()
@@ -81,12 +76,9 @@ class CompanyResource extends Resource
                     ->copyMessage('URL copied')
                     ->copyMessageDuration(1500),
 
-                TextColumn::make('description')
-                    ->searchable(),
-
-                TextColumn::make('email')
-                    ->searchable()
-                    ->sortable(),
+                TextColumn::make('certifications_count')
+                    ->label('Certifications')
+                    ->counts('certifications'),
             ])
             ->filters([
                 //
@@ -96,7 +88,7 @@ class CompanyResource extends Resource
                     ViewAction::make(),
                     EditAction::make(),
                     DeleteAction::make(),
-                ])
+                ]),
             ])
             ->bulkActions([
                 BulkActionGroup::make([
@@ -109,15 +101,15 @@ class CompanyResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListCompanies::route('/'),
-            'create' => Pages\CreateCompany::route('/create'),
-            'view' => Pages\ViewCompany::route('/{record}'),
-            'edit' => Pages\EditCompany::route('/{record}/edit'),
+            'index' => Pages\ListCertificationProviders::route('/'),
+            'create' => Pages\CreateCertificationProvider::route('/create'),
+            'view' => Pages\ViewCertificationProvider::route('/{record}'),
+            'edit' => Pages\EditCertificationProvider::route('/{record}/edit'),
         ];
     }
 
     public static function getGloballySearchableAttributes(): array
     {
-        return ['name', 'email'];
+        return ['name'];
     }
 }
