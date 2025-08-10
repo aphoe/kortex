@@ -49,6 +49,11 @@ class CertificationResource extends Resource
                     ->columnSpan('full')
                     ->required(),
 
+                TextInput::make('url')
+                    ->label('URL')
+                    ->columnSpan('full')
+                    ->url(),
+
                 Select::make('certification_provider_id')
                     ->relationship('provider', 'name')
                     //->searchable()
@@ -120,15 +125,23 @@ class CertificationResource extends Resource
                     ->searchable()
                     ->sortable(),
 
-                TextColumn::make('provider.name')
+                /*TextColumn::make('provider.name')
                     ->label('Provider')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable(),*/
 
                 TextColumn::make('type.name')
                     ->label('Type')
                     ->searchable()
                     ->sortable(),
+
+                TextColumn::make('url')
+                    ->label('URL')
+                    ->limit(30)
+                    ->searchable()
+                    ->copyable()
+                    ->copyMessage('URL copied')
+                    ->copyMessageDuration(1500),
 
                 //TextColumn::make('description'),
 
