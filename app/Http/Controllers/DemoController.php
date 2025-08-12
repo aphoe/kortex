@@ -12,7 +12,7 @@ class DemoController extends Controller
         $user = new User();
         $user->first_name = 'John';
         $user->surname = 'Doe';
-        $user->email = 'aphoextra@yahoo.co.uk';
+        $user->email = config('project.user.email');
         $user->notify(new TestNotification());
     }
 }

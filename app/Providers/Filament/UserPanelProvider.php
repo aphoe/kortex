@@ -55,6 +55,7 @@ class UserPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->brandLogo(asset('images/logo.png'))
+            ->darkModeBrandLogo(asset('images/logo-dark.png'))
             ->favicon(asset('images/favicon.png'))
             ->navigationGroups([
                 NavigationGroupEnum::RESOURCES->label(),
