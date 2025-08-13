@@ -88,6 +88,10 @@ class CourseProviderResource extends Resource
                 TextColumn::make('email')
                     ->searchable()
                     ->sortable(),
+
+                TextColumn::make('courses_count')
+                    ->label('Courses')
+                    ->counts('courses'),
             ])
             ->filters([
                 //

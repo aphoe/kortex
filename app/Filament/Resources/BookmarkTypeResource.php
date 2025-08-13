@@ -67,6 +67,10 @@ class BookmarkTypeResource extends Resource
                     ->label('Bookmarks')
                     ->counts('bookmarks'),
 
+                TextColumn::make('notes_count')
+                    ->label('Notes')
+                    ->counts('notes'),
+
                 //TextColumn::make('description'),
             ])
             ->filters([
