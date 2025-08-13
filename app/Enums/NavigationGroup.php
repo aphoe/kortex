@@ -15,6 +15,7 @@ enum NavigationGroup: string
 
     case MISC = 'miscellaneous';
     case RESOURCES = 'resources';
+    case TOOLS = 'tools';
     case USERS = 'users';
 
     public function label(): string
