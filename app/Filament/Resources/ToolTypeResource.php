@@ -61,6 +61,10 @@ class ToolTypeResource extends Resource
                 TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
+
+                TextColumn::make('tools_count')
+                    ->label('Tools')
+                    ->counts('tools'),
             ])
             ->filters([
                 //
