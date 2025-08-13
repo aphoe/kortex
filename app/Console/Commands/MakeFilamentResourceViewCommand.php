@@ -16,7 +16,7 @@ class MakeFilamentResourceViewCommand extends Command
 
         $command = "php artisan make:filament-page View{$model} --resource={$model}Resource --type=ViewRecord";
 
-        $response = shell_exec($command);
+        $response = passthru($command);
 
         $this->info($response);
     }
