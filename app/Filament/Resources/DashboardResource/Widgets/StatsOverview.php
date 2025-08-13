@@ -34,7 +34,7 @@ class StatsOverview extends BaseWidget
             Stat::make('Bookmarks', Number::abbreviate(Bookmark::count(), maxPrecision: 3))
                 ->description('Total saved bookmarks')
                 ->descriptionIcon('heroicon-s-bookmark'),
-            Stat::make('Bookmarks', Number::abbreviate(Company::count(), maxPrecision: 3))
+            Stat::make('Companies', Number::abbreviate(Company::count(), maxPrecision: 3))
                 ->description('Total companies')
                 ->descriptionIcon('heroicon-s-building-office'),
         ];
