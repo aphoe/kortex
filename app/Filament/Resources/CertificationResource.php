@@ -145,8 +145,8 @@ class CertificationResource extends Resource
 
                 //TextColumn::make('description'),
 
-                TextColumn::make('validity')
-                    ->suffix(fn(Certification $record): string => ' ' . Str::plural('year', $record->validity)),
+                /*TextColumn::make('validity')
+                    ->suffix(fn(Certification $record): string => ' ' . Str::plural('year', $record->validity)),*/
 
                 TextColumn::make('fee')
                     ->money(fn(Certification $record): string => $record->currency->code)
@@ -165,6 +165,10 @@ class CertificationResource extends Resource
                 TextColumn::make('requires_recertification_exam')
                     ->label('Recert.')
                     ->formatStateUsing(fn (Certification $record): string => $record->requires_recertification),
+
+                TextColumn::make('filament_comments_count')
+                    ->label('Comments')
+                    ->counts('filamentComments'),
 
                 //TextColumn::make('renewal_fee'),
 

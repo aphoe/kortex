@@ -80,6 +80,10 @@ class NoteResource extends Resource
                     ->searchable()
                     ->sortable(),
 
+                TextColumn::make('filament_comments_count')
+                    ->label('Comments')
+                    ->counts('filamentComments'),
+
                 //TextColumn::make('description'),
             ])
             ->filters([

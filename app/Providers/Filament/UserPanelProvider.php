@@ -59,6 +59,7 @@ class UserPanelProvider extends PanelProvider
             ->favicon(asset('images/favicon.png'))
             ->navigationGroups([
                 NavigationGroupEnum::RESOURCES->label(),
+                NavigationGroupEnum::TOOLS->label(),
                 NavigationGroupEnum::COURSES->label(),
                 NavigationGroupEnum::CERTIFICATIONS->label(),
                 NavigationGroupEnum::BOOKMARKS->label(),

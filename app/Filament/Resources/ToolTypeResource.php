@@ -3,8 +3,8 @@
 namespace App\Filament\Resources;
 
 use App\Enums\NavigationGroup;
-use App\Filament\Resources\BookmarkTypeResource\Pages;
-use App\Models\BookmarkType;
+use App\Filament\Resources\ToolTypeResource\Pages;
+use App\Models\ToolType;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\TextInput;
@@ -19,19 +19,19 @@ use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class BookmarkTypeResource extends Resource
+class ToolTypeResource extends Resource
 {
-    protected static ?string $model = BookmarkType::class;
+    protected static ?string $model = ToolType::class;
 
-    protected static ?string $slug = 'bookmark-types';
+    protected static ?string $slug = 'tool-types';
 
     protected static ?string $navigationIcon = 'heroicon-o-folder';
 
-    protected static ?string $navigationLabel  = 'Types';
+    protected static ?string $navigationLabel = 'Types';
 
     public static function getNavigationGroup(): ?string
     {
-        return NavigationGroup::BOOKMARKS->label();
+        return NavigationGroup::TOOLS->label();
     }
 
     public static function form(Form $form): Form
@@ -39,19 +39,18 @@ class BookmarkTypeResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')
-                    ->columnSpan('full')
                     ->required(),
 
                 MarkdownEditor::make('description')
-                    ->columnSpan("full"),
+                    ->columnSpan('full'),
 
                 Placeholder::make('created_at')
                     ->label('Created Date')
-                    ->content(fn(?BookmarkType $record): string => $record?->created_at?->diffForHumans() ?? '-'),
+                    ->content(fn(?ToolType $record): string => $record?->created_at?->diffForHumans() ?? '-'),
 
                 Placeholder::make('updated_at')
                     ->label('Last Modified Date')
-                    ->content(fn(?BookmarkType $record): string => $record?->updated_at?->diffForHumans() ?? '-'),
+                    ->content(fn(?ToolType $record): string => $record?->updated_at?->diffForHumans() ?? '-'),
             ]);
     }
 
@@ -63,15 +62,9 @@ class BookmarkTypeResource extends Resource
                     ->searchable()
                     ->sortable(),
 
-                TextColumn::make('bookmarks_count')
-                    ->label('Bookmarks')
-                    ->counts('bookmarks'),
-
-                TextColumn::make('notes_count')
-                    ->label('Notes')
-                    ->counts('notes'),
-
-                //TextColumn::make('description'),
+                TextColumn::make('tools_count')
+                    ->label('Tools')
+                    ->counts('tools'),
             ])
             ->filters([
                 //
@@ -94,10 +87,10 @@ class BookmarkTypeResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListBookmarkTypes::route('/'),
-            'create' => Pages\CreateBookmarkType::route('/create'),
-            'view' => Pages\ViewBookmarkType::route('/{record}'),
-            'edit' => Pages\EditBookmarkType::route('/{record}/edit'),
+            'index' => Pages\ListToolTypes::route('/'),
+            'create' => Pages\CreateToolType::route('/create'),
+            'view' => Pages\ViewToolType::route('/{record}'),
+            'edit' => Pages\EditToolType::route('/{record}/edit'),
         ];
     }
 

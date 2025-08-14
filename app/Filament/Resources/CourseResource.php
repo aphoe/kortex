@@ -123,6 +123,10 @@ class CourseResource extends Resource
                     ->searchable()
                     ->sortable()
                     ->formatStateUsing(fn (string $state, ?Course $record): string => $record->pricing_tier_type_string),
+
+                TextColumn::make('filament_comments_count')
+                    ->label('Comments')
+                    ->counts('filamentComments'),
             ])
             ->filters([
                 //
