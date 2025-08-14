@@ -112,9 +112,9 @@ class ResourceResource extends ResourcesResource
                     ->searchable()
                     ->sortable(),
 
-                TextColumn::make('company.name')
+                /*TextColumn::make('company.name')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable(),*/
 
                 TextColumn::make('resourceCategory.name')
                     ->label('Category')
@@ -137,6 +137,10 @@ class ResourceResource extends ResourcesResource
                 TextColumn::make('is_open_source')
                     ->label('Open Source')
                     ->formatStateUsing(fn (string $state, ?Resource $record): string => $record->open_source),
+
+                TextColumn::make('filament_comments_count')
+                    ->label('Comments')
+                    ->counts('filamentComments'),
             ])
             ->filters([
                 //

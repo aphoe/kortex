@@ -7,6 +7,7 @@ use App\Filament\Resources\TutorialResource\Pages;
 use App\Models\Tutorial;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Placeholder;
+use Filament\Forms\Components\SpatieTagsInput;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -18,6 +19,8 @@ use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Parallax\FilamentComments\Tables\Actions\CommentsAction;
+use Spatie\Tags\Tag;
 
 class TutorialResource extends Resource
 {
@@ -43,6 +46,10 @@ class TutorialResource extends Resource
                 TextInput::make('url')
                     ->columnSpanFull()
                     ->url(),
+
+                SpatieTagsInput::make('tags')
+                    ->columnSpanFull()
+                    ->suggestions(Tag::pluck('name')->toArray()),
 
                 MarkdownEditor::make('notes')
                     ->columnSpan('full')
@@ -79,6 +86,10 @@ class TutorialResource extends Resource
                     ->copyable()
                     ->copyMessage('URL copied')
                     ->copyMessageDuration(1500),
+
+                TextColumn::make('filament_comments_count')
+                    ->label('Comments')
+                    ->counts('filamentComments'),
             ])
             ->filters([
                 //
@@ -86,6 +97,7 @@ class TutorialResource extends Resource
             ->actions([
                 ActionGroup::make([
                     ViewAction::make(),
+                    CommentsAction::make(),
                     EditAction::make(),
                     DeleteAction::make(),
                 ]),

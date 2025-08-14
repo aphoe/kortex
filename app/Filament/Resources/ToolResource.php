@@ -11,6 +11,7 @@ use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\SpatieTagsInput;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -24,6 +25,8 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Parallax\FilamentComments\Tables\Actions\CommentsAction;
+use Spatie\Tags\Tag;
 
 class ToolResource extends Resource
 {
@@ -91,6 +94,10 @@ class ToolResource extends Resource
 
                 MarkdownEditor::make('pricing'),
 
+                SpatieTagsInput::make('tags')
+                    ->columnSpanFull()
+                    ->suggestions(Tag::pluck('name')->toArray()),
+
                 Placeholder::make('created_at')
                     ->label('Created Date')
                     ->content(fn(?Tool $record): string => $record?->created_at?->diffForHumans() ?? '-'),
@@ -139,6 +146,7 @@ class ToolResource extends Resource
             ->actions([
                 ActionGroup::make([
                     ViewAction::make(),
+                    CommentsAction::make(),
                     EditAction::make(),
                     DeleteAction::make(),
                 ])
