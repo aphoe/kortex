@@ -55,9 +55,11 @@ class ToolResource extends Resource
                     ->required(),
 
                 TextInput::make('url')
+                    ->label('URL')
                     ->url(),
 
                 TextInput::make('git_repo_url')
+                    ->label('Git Repo URL')
                     ->url(),
 
                 Grid::make()
@@ -139,6 +141,10 @@ class ToolResource extends Resource
                 TextColumn::make('has_affiliate')
                     ->label('Affiliate')
                     ->formatStateUsing(fn (string $state, ?Tool $record): string => $record->affiliate),
+
+                TextColumn::make('filament_comments_count')
+                    ->label('Comments')
+                    ->counts('filamentComments'),
             ])
             ->filters([
                 //
