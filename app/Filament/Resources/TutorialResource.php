@@ -44,6 +44,7 @@ class TutorialResource extends Resource
                     ->required(),
 
                 TextInput::make('url')
+                    ->label('URL')
                     ->columnSpanFull()
                     ->url(),
 
