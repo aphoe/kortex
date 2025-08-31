@@ -25,12 +25,21 @@ class TagsChart extends ChartWidget
 
     protected function getData(): array
     {
-        $counts = Tag::select('tags.*', DB::raw('COUNT(taggables.tag_id) as models_count'))
+        $countItems = Tag::select('tags.*', DB::raw('COUNT(taggables.tag_id) as models_count'))
             ->leftJoin('taggables', 'tags.id', '=', 'taggables.tag_id')
             ->groupBy('tags.id')
             ->get()
+            ->sortByDesc('models_count')
+            ->take(30)
             ->pluck('models_count', 'name')
             ->toArray();
+
+        $counts = [];
+        foreach ($countItems as $key => $value) {
+            $counts[ucwords($key)] = $value;
+        }
+
+        ksort($counts, SORT_FLAG_CASE);
 
         $label = [];
         $data = [];
