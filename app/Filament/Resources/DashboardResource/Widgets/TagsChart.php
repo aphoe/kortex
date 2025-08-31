@@ -3,12 +3,13 @@
 namespace App\Filament\Resources\DashboardResource\Widgets;
 
 use App\Classes\WidgetSetting;
-use App\Models\ToolType;
 use Filament\Widgets\ChartWidget;
+use Illuminate\Support\Facades\DB;
+use Spatie\Tags\Tag;
 
-class ToolTypesChart extends ChartWidget
+class TagsChart extends ChartWidget
 {
-    protected static ?string $heading = 'Tool types';
+    protected static ?string $heading = 'Tags';
 
     protected static ?string $pollingInterval = null;
 
@@ -24,27 +25,28 @@ class ToolTypesChart extends ChartWidget
 
     protected function getData(): array
     {
-        $countsArray = ToolType::withCount('tools')
+        $counts = Tag::select('tags.*', DB::raw('COUNT(taggables.tag_id) as models_count'))
+            ->leftJoin('taggables', 'tags.id', '=', 'taggables.tag_id')
+            ->groupBy('tags.id')
             ->get()
-            ->pluck('tools_count', 'name')
+            ->pluck('models_count', 'name')
             ->toArray();
 
         $label = [];
         $data = [];
 
-        foreach ($countsArray as $key => $value) {
+        foreach ($counts as $key => $value) {
             $label[] = $key;
             $data[] = $value;
         }
 
-        //dd($label, $data);
-
         return [
             'datasets' => [
                 [
-                    'label' => 'Tool types',
+                    'label' => 'Tags',
                     'data' => $data,
-                    'backgroundColor' => (new WidgetSetting())->colors(true, 0.6),
+                    'backgroundColor' => (new WidgetSetting())->colors(false, 0.6),
+                    'borderColor' => (new WidgetSetting())->colors(false, 0.8),
                 ],
             ],
             'labels' => $label,
@@ -53,11 +55,16 @@ class ToolTypesChart extends ChartWidget
 
     public function getDescription(): ?string
     {
-        return 'Show the count of tools for each tool type';
+        return 'Show count for each tags';
+    }
+
+    public function getColumnSpan(): int | string | array
+    {
+        return 'full';
     }
 
     protected function getType(): string
     {
-        return 'doughnut';
+        return 'bar';
     }
 }

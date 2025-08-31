@@ -5,6 +5,7 @@ namespace App\Providers\Filament;
 use App\Enums\NavigationGroup as NavigationGroupEnum;
 use App\Filament\Pages\EditProfile;
 use App\Filament\Resources\DashboardResource\Widgets\StatsOverview;
+use App\Filament\Resources\DashboardResource\Widgets\TagsChart;
 use App\Filament\Resources\DashboardResource\Widgets\ToolsChart;
 use App\Filament\Resources\DashboardResource\Widgets\ToolTypesChart;
 use Filament\Http\Middleware\Authenticate;
@@ -43,6 +44,7 @@ class UserPanelProvider extends PanelProvider
                 StatsOverview::class,
                 ToolsChart::class,
                 ToolTypesChart::class,
+                TagsChart::class,
             ])
             ->middleware([
                 EncryptCookies::class,
