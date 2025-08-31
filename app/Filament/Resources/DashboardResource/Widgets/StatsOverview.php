@@ -7,6 +7,7 @@ use App\Models\Certification;
 use App\Models\Company;
 use App\Models\Course;
 use App\Models\Resource;
+use App\Models\Tool;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use Illuminate\Support\Number;
@@ -25,6 +26,9 @@ class StatsOverview extends BaseWidget
             Stat::make('Resources', Number::abbreviate(Resource::count(), maxPrecision: 3))
                 ->description('Total resources')
                 ->descriptionIcon('heroicon-s-cpu-chip'),
+            Stat::make('Tools', Number::abbreviate(Tool::count(), maxPrecision: 3))
+                ->description('Total tools')
+                ->descriptionIcon('heroicon-s-wrench-screwdriver'),
             Stat::make('Certifications', Number::abbreviate(Certification::count(), maxPrecision: 3))
                 ->description('Total certifications')
                 ->descriptionIcon('heroicon-s-sparkles'),
