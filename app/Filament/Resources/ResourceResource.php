@@ -155,7 +155,7 @@ class ResourceResource extends ResourcesResource
             ])
             ->bulkActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    //DeleteBulkAction::make(),
                 ]),
             ])
             ->defaultSort('name');
