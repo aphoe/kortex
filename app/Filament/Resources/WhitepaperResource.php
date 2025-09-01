@@ -2,12 +2,11 @@
 
 namespace App\Filament\Resources;
 
-use App\Enums\CourseProviderType;
 use App\Enums\NavigationGroup;
-use App\Filament\Resources\CourseProviderResource\Pages;
-use App\Models\CourseProvider;
+use App\Filament\Resources\WhitepaperResource\Pages;
+use App\Models\Whitepaper;
+use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Placeholder;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -19,50 +18,47 @@ use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Parallax\FilamentComments\Tables\Actions\CommentsAction;
 
-class CourseProviderResource extends Resource
+class WhitepaperResource extends Resource
 {
-    protected static ?string $model = CourseProvider::class;
+    protected static ?string $model = Whitepaper::class;
 
-    protected static ?string $slug = 'course-providers';
+    protected static ?string $slug = 'whitepapers';
 
-    protected static ?string $navigationIcon = 'heroicon-o-building-library';
-
-    protected static ?string $navigationLabel = 'Providers';
+    protected static ?string $navigationIcon = 'heroicon-o-inbox-stack';
 
     public static function getNavigationGroup(): ?string
     {
-        return NavigationGroup::COURSES->label();
+        return NavigationGroup::RESOURCES->label();
     }
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                TextInput::make('name')
-                    ->columnSpan('full')
+                TextInput::make('title')
                     ->required(),
 
                 TextInput::make('url')
-                    ->columnSpan('full')
                     ->label('URL')
+                    ->required()
                     ->url(),
 
-                Select::make('type')
-                    ->options(
-                        CourseProviderType::labelArray()
-                    )
-                    ->required(),
+                MarkdownEditor::make('abstract')
+                    ->required()
+                    ->columnSpan('full'),
 
-                TextInput::make('email'),
+                MarkdownEditor::make('summary')
+                    ->columnSpan('full'),
 
                 Placeholder::make('created_at')
                     ->label('Created Date')
-                    ->content(fn(?CourseProvider $record): string => $record?->created_at?->diffForHumans() ?? '-'),
+                    ->content(fn(?Whitepaper $record): string => $record?->created_at?->diffForHumans() ?? '-'),
 
                 Placeholder::make('updated_at')
                     ->label('Last Modified Date')
-                    ->content(fn(?CourseProvider $record): string => $record?->updated_at?->diffForHumans() ?? '-'),
+                    ->content(fn(?Whitepaper $record): string => $record?->updated_at?->diffForHumans() ?? '-'),
             ]);
     }
 
@@ -70,12 +66,9 @@ class CourseProviderResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')
+                TextColumn::make('title')
                     ->searchable()
                     ->sortable(),
-
-                TextColumn::make('type')
-                    ->formatStateUsing(fn (string $state, ?CourseProvider $record): string => $record->type_string),
 
                 TextColumn::make('url')
                     ->label('URL')
@@ -85,13 +78,9 @@ class CourseProviderResource extends Resource
                     ->copyMessage('URL copied')
                     ->copyMessageDuration(1500),
 
-                TextColumn::make('email')
-                    ->searchable()
-                    ->sortable(),
-
-                TextColumn::make('courses_count')
-                    ->label('Courses')
-                    ->counts('courses'),
+                TextColumn::make('filament_comments_count')
+                    ->label('Comments')
+                    ->counts('filamentComments'),
             ])
             ->filters([
                 //
@@ -99,6 +88,7 @@ class CourseProviderResource extends Resource
             ->actions([
                 ActionGroup::make([
                     ViewAction::make(),
+                    CommentsAction::make(),
                     EditAction::make(),
                     DeleteAction::make(),
                 ])
@@ -108,21 +98,21 @@ class CourseProviderResource extends Resource
                     //DeleteBulkAction::make(),
                 ]),
             ])
-            ->defaultSort('name');
+            ->defaultSort('title');
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListCourseProviders::route('/'),
-            'create' => Pages\CreateCourseProvider::route('/create'),
-            'view' => Pages\ViewCourseProvider::route('/{record}'),
-            'edit' => Pages\EditCourseProvider::route('/{record}/edit'),
+            'index' => Pages\ListWhitepapers::route('/'),
+            'create' => Pages\CreateWhitepaper::route('/create'),
+            'view' => Pages\ViewWhitepaper::route('/{record}'),
+            'edit' => Pages\EditWhitepaper::route('/{record}/edit'),
         ];
     }
 
     public static function getGloballySearchableAttributes(): array
     {
-        return ['name', 'email'];
+        return ['title'];
     }
 }
