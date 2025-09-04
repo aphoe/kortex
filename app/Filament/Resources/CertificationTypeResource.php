@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Classes\FilamentManager;
 use App\Enums\NavigationGroup;
 use App\Filament\Resources\CertificationTypeResource\Pages;
 use App\Models\CertificationType;
@@ -83,7 +84,8 @@ class CertificationTypeResource extends Resource
                     //DeleteBulkAction::make(),
                 ]),
             ])
-            ->defaultSort('name');
+            ->defaultSort('name')
+            ->paginated(FilamentManager::PAGINATION_OPTIONS);
     }
 
     public static function getPages(): array

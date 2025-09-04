@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Classes\FilamentManager;
 use App\Enums\NavigationGroup;
 use App\Filament\Resources\ResourceCategoryResource\Pages;
 use App\Models\ResourceCategory;
@@ -85,7 +86,8 @@ class ResourceCategoryResource extends Resource
                     //DeleteBulkAction::make(),
                 ]),
             ])
-            ->defaultSort('name');
+            ->defaultSort('name')
+            ->paginated(FilamentManager::PAGINATION_OPTIONS);
     }
 
     public static function getPages(): array
