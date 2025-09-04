@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Classes\FilamentManager;
 use App\Enums\CourseProviderType;
 use App\Enums\NavigationGroup;
 use App\Filament\Resources\CourseProviderResource\Pages;
@@ -108,7 +109,8 @@ class CourseProviderResource extends Resource
                     //DeleteBulkAction::make(),
                 ]),
             ])
-            ->defaultSort('name');
+            ->defaultSort('name')
+            ->paginated(FilamentManager::PAGINATION_OPTIONS);
     }
 
     public static function getPages(): array
