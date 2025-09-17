@@ -70,6 +70,11 @@ class CompanyResource extends Resource
                 fn (Model $record): string => route('filament.user.resources.companies.view', ['record' => $record]),
             )
             ->columns([
+                TextColumn::make('index')
+                    ->label('#')
+                    ->sortable()
+                    ->rowIndex(),
+
                 TextColumn::make('name')
                     ->searchable()
                     ->sortable(),

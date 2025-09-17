@@ -102,6 +102,11 @@ class CourseResource extends Resource
                 fn (Model $record): string => route('filament.user.resources.courses.view', ['record' => $record]),
             )
             ->columns([
+                TextColumn::make('index')
+                    ->label('#')
+                    ->sortable()
+                    ->rowIndex(),
+
                 TextColumn::make('title')
                     ->searchable()
                     ->sortable(),
