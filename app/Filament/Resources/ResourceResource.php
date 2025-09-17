@@ -101,6 +101,11 @@ class ResourceResource extends ResourcesResource
                 fn (Model $record): string => route('filament.user.resources.resources.view', ['record' => $record]),
             )
             ->columns([
+                TextColumn::make('index')
+                    ->label('#')
+                    ->sortable()
+                    ->rowIndex(),
+
                 ImageColumn::make('image')
                     ->height(60)
                     ->default(asset('images/models/defaults/resource.png'))

@@ -59,6 +59,11 @@ class ToolTypeResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('index')
+                    ->label('#')
+                    ->sortable()
+                    ->rowIndex(),
+
                 TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
