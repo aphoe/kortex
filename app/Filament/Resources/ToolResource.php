@@ -189,7 +189,12 @@ class ToolResource extends Resource
 
     public static function getGloballySearchableAttributes(): array
     {
-        return ['name', 'type.name'];
+        return ['name', 'type.name', 'url', 'git_repo_url', 'description', 'features', 'pricing'];
+    }
+
+    public static function getGlobalSearchResultUrl(Model $record): string
+    {
+        return BookmarkResource::getUrl('view', ['record' => $record]);
     }
 
     public static function getGlobalSearchResultDetails(Model $record): array

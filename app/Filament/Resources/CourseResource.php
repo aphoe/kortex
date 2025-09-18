@@ -171,7 +171,12 @@ class CourseResource extends Resource
 
     public static function getGloballySearchableAttributes(): array
     {
-        return ['title', 'courseProvider.name'];
+        return ['title', 'courseProvider.name', 'description', 'url'];
+    }
+
+    public static function getGlobalSearchResultUrl(Model $record): string
+    {
+        return BookmarkResource::getUrl('view', ['record' => $record]);
     }
 
     public static function getGlobalSearchResultDetails(Model $record): array

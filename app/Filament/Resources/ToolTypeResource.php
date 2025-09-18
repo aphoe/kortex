@@ -19,6 +19,7 @@ use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 
 class ToolTypeResource extends Resource
 {
@@ -103,6 +104,11 @@ class ToolTypeResource extends Resource
 
     public static function getGloballySearchableAttributes(): array
     {
-        return ['name'];
+        return ['name', 'description'];
+    }
+
+    public static function getGlobalSearchResultUrl(Model $record): string
+    {
+        return BookmarkResource::getUrl('view', ['record' => $record]);
     }
 }

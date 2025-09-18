@@ -219,7 +219,12 @@ class CertificationResource extends Resource
 
     public static function getGloballySearchableAttributes(): array
     {
-        return ['name', 'provider.name', 'type.name'];
+        return ['name', 'provider.name', 'type.name', 'url', 'description', 'level', 'accreditation_body', 'prerequisite'];
+    }
+
+    public static function getGlobalSearchResultUrl(Model $record): string
+    {
+        return BookmarkResource::getUrl('view', ['record' => $record]);
     }
 
     public static function getGlobalSearchResultDetails(Model $record): array

@@ -20,6 +20,7 @@ use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 use Parallax\FilamentComments\Tables\Actions\CommentsAction;
 use Spatie\Tags\Tag;
 
@@ -130,6 +131,11 @@ class TutorialResource extends Resource
 
     public static function getGloballySearchableAttributes(): array
     {
-        return ['title'];
+        return ['title', 'url', 'notes', 'actionable_steps', 'todo'];
+    }
+
+    public static function getGlobalSearchResultUrl(Model $record): string
+    {
+        return BookmarkResource::getUrl('view', ['record' => $record]);
     }
 }

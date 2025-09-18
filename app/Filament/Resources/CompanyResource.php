@@ -125,6 +125,11 @@ class CompanyResource extends Resource
 
     public static function getGloballySearchableAttributes(): array
     {
-        return ['name', 'email'];
+        return ['name', 'email', 'description', 'url'];
+    }
+
+    public static function getGlobalSearchResultUrl(Model $record): string
+    {
+        return BookmarkResource::getUrl('view', ['record' => $record]);
     }
 }
