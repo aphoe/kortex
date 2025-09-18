@@ -185,7 +185,12 @@ class ResourceResource extends ResourcesResource
 
     public static function getGloballySearchableAttributes(): array
     {
-        return ['name', 'company.name', 'resourceCategory.name'];
+        return ['name', 'company.name', 'resourceCategory.name', 'description', 'url', 'type'];
+    }
+
+    public static function getGlobalSearchResultUrl(Model $record): string
+    {
+        return BookmarkResource::getUrl('view', ['record' => $record]);
     }
 
     public static function getGlobalSearchResultDetails(Model $record): array
