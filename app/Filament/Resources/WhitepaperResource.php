@@ -19,6 +19,7 @@ use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
 use Parallax\FilamentComments\Tables\Actions\CommentsAction;
 
@@ -126,6 +127,11 @@ class WhitepaperResource extends Resource
 
     public static function getGlobalSearchResultUrl(Model $record): string
     {
-        return BookmarkResource::getUrl('view', ['record' => $record]);
+        return WhitepaperResource::getUrl('view', ['record' => $record]);
+    }
+
+    public static function getGlobalSearchResultTitle(Model $record): string | Htmlable
+    {
+        return $record->title;
     }
 }

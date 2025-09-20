@@ -24,6 +24,7 @@ use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Parallax\FilamentComments\Tables\Actions\CommentsAction;
@@ -192,9 +193,14 @@ class ToolResource extends Resource
         return ['name', 'type.name', 'url', 'git_repo_url', 'description', 'features', 'pricing'];
     }
 
+    public static function getGlobalSearchResultTitle(Model $record): string | Htmlable
+    {
+        return $record->name;
+    }
+
     public static function getGlobalSearchResultUrl(Model $record): string
     {
-        return BookmarkResource::getUrl('view', ['record' => $record]);
+        return ToolResource::getUrl('view', ['record' => $record]);
     }
 
     public static function getGlobalSearchResultDetails(Model $record): array
