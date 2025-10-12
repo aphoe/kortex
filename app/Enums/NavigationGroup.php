@@ -14,6 +14,8 @@ enum NavigationGroup: string
     case COURSES = 'courses';
 
     case MISC = 'miscellaneous';
+
+    case PROMPTS = 'prompts';
     case RESOURCES = 'resources';
     case TOOLS = 'tools';
     case USERS = 'users';

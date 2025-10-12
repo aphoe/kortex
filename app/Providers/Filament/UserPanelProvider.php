@@ -68,6 +68,7 @@ class UserPanelProvider extends PanelProvider
                 NavigationGroupEnum::TOOLS->label(),
                 NavigationGroupEnum::COURSES->label(),
                 NavigationGroupEnum::CERTIFICATIONS->label(),
+                NavigationGroupEnum::PROMPTS->label(),
                 NavigationGroupEnum::BOOKMARKS->label(),
                 NavigationGroupEnum::MISC->label(),
                 NavigationGroupEnum::USERS->label(),
