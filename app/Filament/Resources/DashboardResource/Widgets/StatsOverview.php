@@ -7,6 +7,7 @@ use App\Models\Certification;
 use App\Models\Company;
 use App\Models\Course;
 use App\Models\Note;
+use App\Models\Prompt;
 use App\Models\Resource;
 use App\Models\Tool;
 use App\Models\Tutorial;
@@ -44,6 +45,9 @@ class StatsOverview extends BaseWidget
             Stat::make('Certifications', Number::abbreviate(Certification::count(), maxPrecision: 3))
                 ->description('Total certifications')
                 ->descriptionIcon('heroicon-s-sparkles'),
+            Stat::make('Prompts', Number::abbreviate(Prompt::count(), maxPrecision: 3))
+                ->description('Total prompts')
+                ->descriptionIcon('heroicon-s-command-line'),
             Stat::make('Bookmarks', Number::abbreviate(Bookmark::count(), maxPrecision: 3))
                 ->description('Total saved bookmarks')
                 ->descriptionIcon('heroicon-s-bookmark'),
