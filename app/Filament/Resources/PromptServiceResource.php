@@ -77,6 +77,10 @@ class PromptServiceResource extends Resource
                     ->searchable()
                     ->sortable(),
 
+                TextColumn::make('prompts_count')
+                    ->label('Prompts')
+                    ->counts('prompts'),
+
                 TextColumn::make('company')
                     ->searchable()
                     ->sortable(),

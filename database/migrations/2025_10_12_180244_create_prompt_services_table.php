@@ -12,7 +12,7 @@ return new class extends Migration {
             $table->string('name');
             $table->string('company')->nullable();
             $table->string('url')->nullable();
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
