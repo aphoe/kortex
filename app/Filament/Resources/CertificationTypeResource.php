@@ -45,7 +45,7 @@ class CertificationTypeResource extends Resource
                     ->required(),
 
                 MarkdownEditor::make('description')
-                    ->columnSpan('full'),
+                    ->columnSpanFull(),
 
                 Placeholder::make('created_at')
                     ->label('Created Date')

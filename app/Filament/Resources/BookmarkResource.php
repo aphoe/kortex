@@ -44,12 +44,12 @@ class BookmarkResource extends Resource
         return $form
             ->schema([
                 TextInput::make('title')
-                    ->columnSpan('full')
+                    ->columnSpanFull()
                     ->required(),
 
                 TextInput::make('url')
                     ->label('URL')
-                    ->columnSpan('full')
+                    ->columnSpanFull()
                     ->required()
                     ->url(),
 

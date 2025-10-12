@@ -48,12 +48,12 @@ class ToolResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')
-                    ->columnSpan('full')
+                    ->columnSpanFull()
                     ->required(),
 
                 Select::make('tool_type_id')
                     ->relationship('type', 'name')
-                    ->columnSpan('full')
+                    ->columnSpanFull()
                     ->required(),
 
                 TextInput::make('url')
@@ -92,7 +92,7 @@ class ToolResource extends Resource
 
 
                 MarkdownEditor::make('description')
-                    ->columnSpan('full'),
+                    ->columnSpanFull(),
 
                 MarkdownEditor::make('features'),
 

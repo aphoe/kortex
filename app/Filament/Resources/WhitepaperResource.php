@@ -50,10 +50,10 @@ class WhitepaperResource extends Resource
 
                 MarkdownEditor::make('abstract')
                     ->required()
-                    ->columnSpan('full'),
+                    ->columnSpanFull(),
 
                 MarkdownEditor::make('summary')
-                    ->columnSpan('full'),
+                    ->columnSpanFull(),
 
                 Placeholder::make('created_at')
                     ->label('Created Date')

@@ -50,7 +50,7 @@ class CourseResource extends Resource
         return $form
             ->schema([
                 TextInput::make('title')
-                    ->columnSpan('full')
+                    ->columnSpanFull()
                     ->required(),
 
                 TextInput::make('url')
@@ -61,7 +61,7 @@ class CourseResource extends Resource
                     ->relationship('courseProvider', 'name'),
 
                 MarkdownEditor::make('description')
-                    ->columnSpan('full'),
+                    ->columnSpanFull(),
 
                 Select::make('level')
                     ->options(

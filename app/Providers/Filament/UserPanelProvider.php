@@ -21,6 +21,7 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use SolutionForest\FilamentSimpleLightBox\SimpleLightBoxPlugin;
 
 class UserPanelProvider extends PanelProvider
 {
@@ -60,6 +61,7 @@ class UserPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
+            ->plugin(SimpleLightBoxPlugin::make())
             ->brandLogo(asset('images/logo.png'))
             ->darkModeBrandLogo(asset('images/logo-dark.png'))
             ->favicon(asset('images/favicon.png'))
@@ -68,6 +70,7 @@ class UserPanelProvider extends PanelProvider
                 NavigationGroupEnum::TOOLS->label(),
                 NavigationGroupEnum::COURSES->label(),
                 NavigationGroupEnum::CERTIFICATIONS->label(),
+                NavigationGroupEnum::PROMPTS->label(),
                 NavigationGroupEnum::BOOKMARKS->label(),
                 NavigationGroupEnum::MISC->label(),
                 NavigationGroupEnum::USERS->label(),

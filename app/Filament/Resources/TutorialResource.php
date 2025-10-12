@@ -56,14 +56,14 @@ class TutorialResource extends Resource
                     ->suggestions(Tag::pluck('name')->toArray()),
 
                 MarkdownEditor::make('notes')
-                    ->columnSpan('full')
+                    ->columnSpanFull()
                     ->required(),
 
                 MarkdownEditor::make('actionable_steps')
-                    ->columnSpan('full'),
+                    ->columnSpanFull(),
 
                 MarkdownEditor::make('todo')
-                    ->columnSpan('full'),
+                    ->columnSpanFull(),
 
                 Placeholder::make('created_at')
                     ->label('Created Date')
