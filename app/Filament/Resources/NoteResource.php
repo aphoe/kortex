@@ -45,7 +45,7 @@ class NoteResource extends Resource
         return $form
             ->schema([
                 TextInput::make('title')
-                    ->columnSpan('full')
+                    ->columnSpanFull()
                     ->required(),
 
                 Select::make('bookmark_type_id')
@@ -56,7 +56,7 @@ class NoteResource extends Resource
                     ->suggestions(Tag::pluck('name')->toArray()),
 
                 MarkdownEditor::make('description')
-                    ->columnSpan('full')
+                    ->columnSpanFull()
                     ->required(),
 
                 Placeholder::make('created_at')

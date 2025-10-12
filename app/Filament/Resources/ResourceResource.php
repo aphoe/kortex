@@ -55,7 +55,7 @@ class ResourceResource extends ResourcesResource
                     ->relationship('resourceCategory', 'name'),
 
                 TextInput::make('name')
-                    ->columnSpan('full')
+                    ->columnSpanFull()
                     ->required(),
 
                 TextInput::make('url')
@@ -83,7 +83,7 @@ class ResourceResource extends ResourcesResource
                     ->suggestions(Tag::pluck('name')->toArray()),
 
                 MarkdownEditor::make('description')
-                    ->columnSpan('full'),
+                    ->columnSpanFull(),
 
                 Placeholder::make('created_at')
                     ->label('Created Date')

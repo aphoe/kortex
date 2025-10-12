@@ -42,7 +42,7 @@ class BookmarkTypeResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')
-                    ->columnSpan('full')
+                    ->columnSpanFull()
                     ->required(),
 
                 MarkdownEditor::make('description')

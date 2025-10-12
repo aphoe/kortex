@@ -42,16 +42,16 @@ class CertificationProviderResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')
-                    ->columnSpan('full')
+                    ->columnSpanFull()
                     ->required(),
 
                 TextInput::make('url')
-                    ->columnSpan('full')
+                    ->columnSpanFull()
                     ->label('URL')
                     ->url(),
 
                 MarkdownEditor::make('description')
-                    ->columnSpan('full'),
+                    ->columnSpanFull(),
 
                 Placeholder::make('created_at')
                     ->label('Created Date')

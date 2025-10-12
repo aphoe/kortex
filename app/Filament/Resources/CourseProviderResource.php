@@ -43,11 +43,11 @@ class CourseProviderResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')
-                    ->columnSpan('full')
+                    ->columnSpanFull()
                     ->required(),
 
                 TextInput::make('url')
-                    ->columnSpan('full')
+                    ->columnSpanFull()
                     ->label('URL')
                     ->url(),
 

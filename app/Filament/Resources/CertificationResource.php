@@ -48,12 +48,12 @@ class CertificationResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')
-                    ->columnSpan('full')
+                    ->columnSpanFull()
                     ->required(),
 
                 TextInput::make('url')
                     ->label('URL')
-                    ->columnSpan('full')
+                    ->columnSpanFull()
                     ->url(),
 
                 Select::make('certification_provider_id')
@@ -76,7 +76,7 @@ class CertificationResource extends Resource
                     ->numeric(),
 
                 MarkdownEditor::make('description')
-                    ->columnSpan('full'),
+                    ->columnSpanFull(),
 
                 Select::make('level')
                     ->options(
@@ -94,11 +94,11 @@ class CertificationResource extends Resource
                     ->integer(),
 
                 SpatieTagsInput::make('tags')
-                    ->columnSpan('full')
+                    ->columnSpanFull()
                     ->suggestions(Tag::pluck('name')->toArray()),
 
                 MarkdownEditor::make('prerequisite')
-                    ->columnSpan('full'),
+                    ->columnSpanFull(),
 
                 Checkbox::make('requires_recertification_exam'),
 
@@ -107,7 +107,7 @@ class CertificationResource extends Resource
                     ->numeric(),
 
                 MarkdownEditor::make('renewal_rules')
-                    ->columnSpan('full'),
+                    ->columnSpanFull(),
 
                 Placeholder::make('created_at')
                     ->label('Created Date')
